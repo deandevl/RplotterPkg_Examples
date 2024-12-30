@@ -1,0 +1,23 @@
+project:
+  title: "RplotterPkg_Examples"
+  output-dir: output
+format:
+  html:
+    fontsize: 1.4rem
+    page-layout: full
+    theme:
+      light: cosmo
+      dark: darkly
+    toc: false
+    other-links:
+      - text: RplotterPkg
+        href: https://github.com/deandevl/RplotterPkg
+      - text: deandevl
+        href: https://github.com/deandevl
+    code-links:
+      - text: source
+        icon: github
+        href: https://github.com/deandevl/RplotterPkg_Examples
+editor: visual
+date: last-modified
+author: Rick Dean

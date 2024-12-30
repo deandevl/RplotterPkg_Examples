@@ -1,0 +1,121 @@
+# RplotterPkg Examples
+
+The goal of RplotterPkg is to provide easy access to the many ggplot2 geom plotting routines for everyday use.  The package uses a functional approach along with the fast, efficient data frame processing from [`data.table`](https://github.com/Rdatatable/data.table "data.table github").
+
+## Installation
+
+You can install the development version of RplotterPkg from [GitHub](https://github.com/) with:
+
+Using `pak::pak()`:
+
+`pak::pak("deandevl/RplotterPkg")`
+
+Using `devtools::install_github()`:
+
+`devtools::install_github("deandevl/RplotterPkg")`
+
+## Setup
+
+Let's load the required R script libraries from CRAN and github:
+
+### Load the required R packages from CRAN:
+
+```{r}
+#| warning: false
+#| message: false
+
+library(data.table)
+library(ggplot2)
+library(RColorBrewer)
+library(aplpack)
+```
+
+### Load the required R package from GitHub:
+
+```{r}
+#| warning: false
+#| message: false
+
+devtools::install_github("deandevl/RplotterPkg")
+```
+
+
+## Standard Plotting
+
+RplotterPkg offers many of the standard plotting such as scatter, box, density, histogram, range, heatmap, and stick plots. The following example shows how easy it is assign x/y axis variables and label for a heatmap.
+
+```{r}
+#| fig-width: 11
+#| fig-height: 7
+#| fig-cap: "Rplotter::create_heatmap example"
+
+
+RplotterPkg::create_heatmap(
+    df = RplotterPkg::spinrates,
+    aes_x = "velocity",
+    aes_y = "spinrate",
+    aes_fill = "swing_miss",
+    aes_label = "swing_miss",
+    label_fontface = "bold",
+    title = "Likelihood of swinging and missing on a fastball",
+    x_title = "Velocity",
+    y_title = "Spinrate",
+    rot_y_tic_label = TRUE
+  ) +
+  ggplot2::scale_fill_gradientn(
+    colors = RColorBrewer::brewer.pal(n = 9, name = "YlOrRd"),
+    n.breaks = 8
+  ) 
+```
+
+## Additional Plotting
+
+Also included with RplotterPkg are routines that are not always available such as spread_level, symmetry, stem_leaf, waffle, and multi-paneled plots.  In the examples below we have a waffle plot of simple proportions and a stem_leaf plot comparing women Boston marathon times by age groups.
+
+```{r}
+#| fig-width: 11.5
+#| fig-height: 8
+#| fig-cap: "RplotterPkg::create_waffle_chart example"
+
+
+proportions_v <- c(
+  var1=10, var2=40, var3=20, var4=50, var5=5,
+  var6=30, var7=10, var8=67, var9=42, var10=33,
+  var11=7, var12=35, var13=22, var14=90, var15=43
+)
+
+RplotterPkg::create_waffle_chart(
+  x = proportions_v,
+  title = "Test For 15 Proportion Variables",
+  cell_color = "white",
+  cell_fill = "brown",
+  cell_nonfill = "lightgray",
+  cell_alpha = 0.5,
+  line_width = 4
+)
+```
+
+```{r}
+#| fig-cap: "RplotterPkg::stem_leaf_display example"
+#| fig-height: 5.5
+
+# stem and leaf for marathon times of women across ages
+marathon_times_lst <- list(
+  "age_20" = RplotterPkg::boston_marathon[age == 20,]$time,
+  "age_30" = RplotterPkg::boston_marathon[age == 30,]$time,
+  "age_40" = RplotterPkg::boston_marathon[age == 40,]$time,
+  "age_50" = RplotterPkg::boston_marathon[age == 50,]$time,
+  "age_60" = RplotterPkg::boston_marathon[age == 60,]$time
+)
+# display stem and leaf of women times across ages
+table_grob <- RplotterPkg::stem_leaf_display(
+  x = marathon_times_lst,
+  title = "Women times(min) in Boston marathon",
+  heading_color = "#FF5500",
+  display_grob = FALSE
+)
+grid::grid.newpage()
+grid::grid.draw(table_grob)
+```
+
+
