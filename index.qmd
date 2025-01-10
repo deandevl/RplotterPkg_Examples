@@ -1,6 +1,6 @@
 # RplotterPkg Examples
 
-The goal of RplotterPkg is to provide easy access to the many ggplot2 geom plotting routines for everyday use.  The package uses a functional approach along with the fast, efficient data frame processing from [`data.table`](https://github.com/Rdatatable/data.table "data.table github").
+The goal of RplotterPkg is to provide easy access to the many ggplot2 geom plotting routines for everyday use. The package uses a functional approach along with the fast, efficient data frame processing from [`data.table`](https://github.com/Rdatatable/data.table "data.table github").
 
 ## Installation
 
@@ -25,7 +25,11 @@ Let's load the required R script libraries from CRAN and github:
 #| message: false
 
 library(data.table)
+library(grid)
+library(gtable)
+library(ggplotify)
 library(ggplot2)
+library(methods)
 library(RColorBrewer)
 library(aplpack)
 ```
@@ -39,16 +43,39 @@ library(aplpack)
 devtools::install_github("deandevl/RplotterPkg")
 ```
 
-
 ## Standard Plotting
 
-RplotterPkg offers many of the standard plotting such as scatter, box, density, histogram, range, heatmap, and stick plots. The following example shows how easy it is assign x/y axis variables and label for a heatmap.
+RplotterPkg offers many of the standard plotting such as scatter, box, density, histogram, range, heatmap, and stick plots. The following example shows how easy it is to assign an x axis variable and label for a bar plot.
+
+```{r}
+#| fig-width: 11
+#| fig-height: 7
+#| fig-cap: "RplotterPkg::create_bar_plot example"
+
+RplotterPkg::create_bar_plot(
+    df = datasets::ToothGrowth,
+    aes_x = "len",
+    x_major_breaks = seq(from = 0, to = 40, by = 5),
+    y_major_breaks = seq(from = 0, to = 16, by = 2),
+    y_limits = c(0, 16),
+    bar_labels = TRUE,
+    bar_fill = "blue",
+    bar_alpha = 0.6,
+    do_coord_flip = TRUE,
+    rot_y_tic_label = TRUE,
+    title = "Tooth Growth",
+    subtitle = "source: datasets::ToothGrowth",
+    x_title = "Length",
+    y_title = "Count"
+  )
+```
+
+Creating a minimal heatmap just requires assigning a dataframe along with column names for the x/y axis' and a dependent variable.
 
 ```{r}
 #| fig-width: 11
 #| fig-height: 7
 #| fig-cap: "Rplotter::create_heatmap example"
-
 
 RplotterPkg::create_heatmap(
     df = RplotterPkg::spinrates,
@@ -70,7 +97,7 @@ RplotterPkg::create_heatmap(
 
 ## Additional Plotting
 
-Also included with RplotterPkg are routines that are not always available such as spread_level, symmetry, stem_leaf, waffle, and multi-paneled plots.  In the examples below we have a waffle plot of simple proportions and a stem_leaf plot comparing women Boston marathon times by age groups.
+Also included with RplotterPkg are routines that are not always available such as spread_level, symmetry, stem_leaf, waffle, and multi-paneled plots. In the examples below we have a waffle plot of simple proportions and a stem_leaf plot comparing women Boston marathon times by age groups.
 
 ```{r}
 #| fig-width: 11.5
@@ -87,11 +114,6 @@ proportions_v <- c(
 RplotterPkg::create_waffle_chart(
   x = proportions_v,
   title = "Test For 15 Proportion Variables",
-  cell_color = "white",
-  cell_fill = "brown",
-  cell_nonfill = "lightgray",
-  cell_alpha = 0.5,
-  line_width = 4
 )
 ```
 
@@ -108,14 +130,9 @@ marathon_times_lst <- list(
   "age_60" = RplotterPkg::boston_marathon[age == 60,]$time
 )
 # display stem and leaf of women times across ages
-table_grob <- RplotterPkg::stem_leaf_display(
+RplotterPkg::stem_leaf_display(
   x = marathon_times_lst,
   title = "Women times(min) in Boston marathon",
-  heading_color = "#FF5500",
-  display_grob = FALSE
+  heading_color = "#FF5500"
 )
-grid::grid.newpage()
-grid::grid.draw(table_grob)
 ```
-
-
