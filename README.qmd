@@ -111,6 +111,7 @@ RplotterPkg::create_waffle_chart(
 ```
 
 ```{r}
+#| fig-width: 11
 #| fig-height: 5.5
 
 marathon_times_lst <- list(
