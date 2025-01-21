@@ -1,6 +1,12 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # RplotterPkg Examples
-Rick Dean
-2025-01-19
+
+Rick Dean 2025-01-20
 
 The goal of RplotterPkg is to provide easy access to the many ggplot2
 geom plotting routines for everyday use. The package uses a functional

@@ -1,6 +1,8 @@
 ---
 title: "RplotterPkg Examples"
-format: gfm
+format: 
+  gfm: default
+  html: default
 editor: visual
 date: last-modified
 author: Rick Dean
