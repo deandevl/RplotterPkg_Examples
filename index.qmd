@@ -1,22 +1,28 @@
 ---
-editor_options: 
-  markdown: 
-    wrap: 72
+title: "RplotterPkg Examples"
+author: Rick Dean
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-location: body
+    mainfont: Verdana
+    html-q-tags: true
+    tbl-cap-location: top
+    fig-cap-location: bottom
+    fig-height: 9
+    fig-width: 12
+    grid:
+      body-width: 1200px
+editor: source
+
 ---
 
-# RplotterPkg Examples
-
-Rick Dean 2025-01-20
-
-The goal of RplotterPkg is to provide easy access to the many ggplot2
-geom plotting routines for everyday use. The package uses a functional
-approach along with the fast, efficient data frame processing from
-[`data.table`](https://github.com/Rdatatable/data.table "data.table github").
+The goal of RplotterPkg is to provide easy access to the many ggplot2 geom plotting routines for everyday use. The package uses a functional approach along with the fast, efficient data frame processing from [`data.table`](https://github.com/Rdatatable/data.table "data.table github").
 
 ## Installation
 
-For the following examples, install the development version of
-RplotterPkg from [GitHub](https://github.com/) with:
+For the following examples, install the development version of [RplotterPkg](https://github.com/deandevl/RplotterPkg) from GitHub with:
 
 Using `pak::pak()`:
 
@@ -30,7 +36,10 @@ Using `devtools::install_github()`:
 
 In addition, load the required R script libraries from CRAN.
 
-``` r
+```{r}
+#| warning: false
+#| message: false
+
 library(data.table)
 library(grid)
 library(gtable)
@@ -43,12 +52,11 @@ library(aplpack)
 
 ## Standard Plotting
 
-RplotterPkg offers many of the standard plotting such as scatter, box,
-density, histogram, range, heatmap, and stick plots. The following
-example shows how easy it is to assign an x axis variable and label for
-a bar plot.
+RplotterPkg offers many of the standard plotting such as scatter, box, density, histogram, range, heatmap, and stick plots. The following example shows how easy it is to assign an x axis variable and label for a bar plot.
 
-``` r
+```{r}
+#| fig-cap: "Figure 1: RplotterPkg::create_bar_plot() example"
+
 RplotterPkg::create_bar_plot(
   df = datasets::ToothGrowth,
   aes_x = "len",
@@ -58,6 +66,7 @@ RplotterPkg::create_bar_plot(
   bar_labels = TRUE,
   bar_fill = "blue",
   bar_alpha = 0.6,
+  bar_label_sz = 6,
   do_coord_flip = TRUE,
   rot_y_tic_label = TRUE,
   title = "Tooth Growth",
@@ -68,12 +77,11 @@ RplotterPkg::create_bar_plot(
 )
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-2-1.png)
+Creating a minimal heatmap just requires assigning a dataframe along with column names for the x/y axis' and a dependent variable.
 
-Creating a minimal heatmap just requires assigning a dataframe along
-with column names for the x/y axis’ and a dependent variable.
+```{r}
+#| fig-cap: "Figure 2: RplotterPkg::create_heatmap() example"
 
-``` r
 RplotterPkg::create_heatmap(
     df = RplotterPkg::spinrates,
     aes_x = "velocity",
@@ -93,17 +101,13 @@ RplotterPkg::create_heatmap(
   ) 
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-3-1.png)
-
 ## Additional Plotting
 
-Also included with RplotterPkg are routines that are not always
-available such as spread_level, symmetry, stem_leaf, waffle, and
-multi-paneled plots. In the examples below we have a waffle plot of
-simple proportions and a stem_leaf plot comparing women Boston marathon
-times by age groups.
+Also included with RplotterPkg are routines that are not always available such as spread_level, symmetry, stem_leaf, waffle, and multi-paneled plots. In the examples below we have a waffle plot of simple proportions and a stem_leaf plot comparing women Boston marathon times by age groups.
 
-``` r
+```{r}
+#| fig-cap: "Figure 3: RplotterPkg::create_waffle_chart()"
+
 proportions_v <- c(
   var1=10, var2=40, var3=20, var4=50, var5=5,
   var6=30, var7=10, var8=67, var9=42, var10=33,
@@ -116,9 +120,9 @@ RplotterPkg::create_waffle_chart(
 )
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
+```{r}
+#| fig-cap: "Figure 4: RplotterPkg::stem_leaf_display() example"
 
-``` r
 marathon_times_lst <- list(
   "age_20" = RplotterPkg::boston_marathon[age == 20,]$time,
   "age_30" = RplotterPkg::boston_marathon[age == 30,]$time,
@@ -133,5 +137,3 @@ RplotterPkg::stem_leaf_display(
   heading_color = "#FF5500"
 )
 ```
-
-![](README_files/figure-commonmark/unnamed-chunk-5-1.png)

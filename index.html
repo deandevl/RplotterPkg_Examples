@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rick Dean">
-<meta name="dcterms.date" content="2025-01-20">
+<meta name="dcterms.date" content="2025-02-22">
 
 <title>RplotterPkg Examples</title>
 <style>
@@ -59,16 +59,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="README_files/libs/clipboard/clipboard.min.js"></script>
-<script src="README_files/libs/quarto-html/quarto.js"></script>
-<script src="README_files/libs/quarto-html/popper.min.js"></script>
-<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="README_files/libs/quarto-html/anchor.min.js"></script>
-<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="README_files/libs/bootstrap/bootstrap-8a79a254b8e706d3c925cde0a310d4f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-22c2c57537bf7b0b6388d73423d22c46.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -76,8 +76,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="README.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 20, 2025</p>
+      <p class="date">February 22, 2025</p>
     </div>
   </div>
   
@@ -110,11 +110,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#installation" id="toc-installation">Installation</a></li>
+  <li><a href="#setup" id="toc-setup">Setup</a></li>
+  <li><a href="#standard-plotting" id="toc-standard-plotting">Standard Plotting</a></li>
+  <li><a href="#additional-plotting" id="toc-additional-plotting">Additional Plotting</a></li>
+  </ul>
+</nav>
 <p>The goal of RplotterPkg is to provide easy access to the many ggplot2 geom plotting routines for everyday use. The package uses a functional approach along with the fast, efficient data frame processing from <a href="https://github.com/Rdatatable/data.table" title="data.table github"><code>data.table</code></a>.</p>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>For the following examples, install the development version of RplotterPkg from <a href="https://github.com/">GitHub</a> with:</p>
+<p>For the following examples, install the development version of <a href="https://github.com/deandevl/RplotterPkg">RplotterPkg</a> from GitHub with:</p>
 <p>Using <code>pak::pak()</code>:</p>
 <p><code>pak::pak("deandevl/RplotterPkg")</code></p>
 <p>Using <code>devtools::install_github()</code>:</p>
@@ -147,18 +156,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">bar_labels =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">bar_fill =</span> <span class="st">"blue"</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">bar_alpha =</span> <span class="fl">0.6</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">do_coord_flip =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">rot_y_tic_label =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Tooth Growth"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"source: datasets::ToothGrowth"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_title =</span> <span class="st">"Length"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_title =</span> <span class="st">"Count"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"RplotterPkg::create_bar_plot example"</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">bar_label_sz =</span> <span class="dv">6</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">do_coord_flip =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">rot_y_tic_label =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Tooth Growth"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"source: datasets::ToothGrowth"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_title =</span> <span class="st">"Length"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_title =</span> <span class="st">"Count"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"RplotterPkg::create_bar_plot example"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="README_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Figure 1: RplotterPkg::create_bar_plot() example</figcaption>
 </figure>
 </div>
 </div>
@@ -183,9 +194,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.breaks =</span> <span class="dv">8</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="README_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Figure 2: RplotterPkg::create_heatmap() example</figcaption>
 </figure>
 </div>
 </div>
@@ -206,9 +218,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Test For 15 Proportion Variables"</span>,</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="README_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="1104"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Figure 3: RplotterPkg::create_waffle_chart()</figcaption>
 </figure>
 </div>
 </div>
@@ -228,9 +241,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heading_color =</span> <span class="st">"#FF5500"</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="README_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Figure 4: RplotterPkg::stem_leaf_display() example</figcaption>
 </figure>
 </div>
 </div>
